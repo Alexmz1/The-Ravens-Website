@@ -14,31 +14,32 @@
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Nos produits</a></li>
+              <li class="nav-item"><a class="nav-link" [routerLink]="''">Home</a></li>
+              <li class="nav-item"><a class="nav-link" [routerLink]="'nos-produits'">Nos produits</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Nous découvrir</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Contactez-nous</a></li>
+              <li class="nav-item"><a class="nav-link" [routerLink]="'contact'">Contactez-nous</a></li>
             </ul>
           </div>
         </div>
       </div>
 
       <div class="logo">
-        <img src="logo.png" alt="Logo">
+        <img src="./assets/images/Logo-thr.png" alt="Logo">
       </div>
 
       <div class="menu d-none d-sm-flex"> <!-- Cette classe signifie que le contenu sera visible uniquement sur les écrans larges ('lg' et plus) -->
         <ul class="navbar-nav flex-row">
-          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Nos produits</a></li>
+          <li class="nav-item"><a class="nav-link" [routerLink]="''">Home</a></li>
+          <li class="nav-item"><a class="nav-link" [routerLink]="'nos-produits'">Nos produits</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Nous découvrir</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Contactez-nous</a></li>
+          <li class="nav-item"><a class="nav-link" [routerLink]="'contact'">Contactez-nous</a></li>
         </ul>
       </div>
 
+
       <div class="icons">
-        <a href="./inscription-connexion.html"><i class='bx bxs-user-circle'></i></a>
-        <i class='bx bx-cart'></i>
+        <a [routerLink]="'connexion'"><i class='bx bxs-user-circle'></i></a>
+        <a [routerLink]="'panier'"><i class='bx bx-cart'></i></a>
       </div>
     </div>
   </nav>

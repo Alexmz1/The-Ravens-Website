@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+body{
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+/* Style du bandeau */
+.banner {
+  position: relative;
+  height: 50%;
+  width: 100%;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.banner-content {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+  text-align: right;
+  color: black;
+  padding: 20px;
+}
+
+.banner-content h2 {
+  font-size: 24px;
+}
+
+.banner-content p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.banner-content a button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+}
+
+
+/* Style de la partie products */
+.products {
+  background-color: white;
+  color: black;
+}
+
+.products h2 {
+  text-align: center;
+}
+
+.products-items {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin: 10px; /* Marge réduite pour éviter de prendre trop de place */
+
+  color: black;
+  max-width: 100%; /* Ajuster la largeur maximale */
+  box-sizing: border-box; /* Inclure les bordures et le rembourrage dans la largeur totale */
+}
+
+.products-img {
+  max-width: 100%;
+  height: auto; /* Hauteur ajustée automatiquement pour conserver le ratio */
+  object-fit: contain; /* Ajuster l'image sans déformation */
+  max-height: 150px;
+}
+
+.products-details {
+  display: flex;
+  flex-direction: column; /* Mettre les détails en colonne pour une meilleure lisibilité */
+  margin-top: 10px;
+}
+
+.products-name {
+  font-weight: bold;
+}
+
+.separator {
+  width: 80%;
+  margin: 10px auto;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.products-category {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.products button {
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+}
+
+.logo {
+  width: 70px;
+  display: block;
+  margin: 0 auto;
+}
+
+

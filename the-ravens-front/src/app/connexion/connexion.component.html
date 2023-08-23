@@ -1,0 +1,35 @@
+<div class="container">
+
+  <h3 class="mt-4 mb-4 text-center">Connexion</h3>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <form (submit)="connexion()">
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <input type="email" [(ngModel)]="utilisateur.email" name="email" class="form-control" placeholder="Email"/>
+    </div>
+
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+      <input type="password" [(ngModel)]="utilisateur.mdp" name="mdp" class="form-control" placeholder="Mot de passe"/>
+    </div>
+
+    <div class="text-center">
+      <div class="col">
+        <!-- Simple link -->
+        <a href="#!">Mot de passe oublier</a>
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary btn-block mb-4 mt-4">Connexion</button>
+    </div>
+  </form>
+
+  <!-- Register buttons -->
+  <div class="text-center">
+    <p>Pas encore membre ? <a [routerLink]="'/inscription'">S'inscrire</a></p>
+  </div>
+</div>

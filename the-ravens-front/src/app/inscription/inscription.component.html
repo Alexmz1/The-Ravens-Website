@@ -1,0 +1,77 @@
+<div class="container">
+
+  <h3 class="mt-4 mb-4 text-center">Inscription</h3>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <form (submit)="inscriptionUtilisateur()">
+    <div class="row">
+      <!-- Prenom input -->
+      <div class="form-outline mb-4 col-lg-6">
+        <input type="text" [(ngModel)]="nouvelUtilisateur.prenom" name="prenom" class="form-control" placeholder="Prénom"/>
+      </div>
+
+      <!-- Nom input -->
+      <div class="form-outline mb-4 col-lg-6">
+        <input type="text" [(ngModel)]="nouvelUtilisateur.nom" name="nom" class="form-control" placeholder="Nom"/>
+      </div>
+    </div>
+
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <input type="email" [(ngModel)]="nouvelUtilisateur.email" name="email" class="form-control" placeholder="Email"/>
+    </div>
+
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+      <input type="password" [(ngModel)]="nouvelUtilisateur.mdp" name="mdp" class="form-control" placeholder="Mot de passe"/>
+    </div>
+
+    <div class="row">
+      <!-- Nb Rue input -->
+      <div class="form-outline mb-4 col-lg-2">
+        <input type="text" [(ngModel)]="nouvelUtilisateur.num_rue" name="num_rue" class="form-control" placeholder="Numéro de rue"/>
+      </div>
+
+      <!-- Rue input -->
+      <div class="form-outline mb-4 col-lg-10">
+        <input type="text" [(ngModel)]="nouvelUtilisateur.rue" name="rue" class="form-control" placeholder="Rue"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Ville input -->
+      <div class="form-outline mb-4 col-lg-4">
+        <input type="text" [(ngModel)]="nouvelUtilisateur.ville" name="ville" class="form-control" placeholder="Ville"/>
+      </div>
+
+      <!-- Code postal input -->
+      <div class="form-outline mb-4 col-lg-4">
+        <input type="text" [(ngModel)]="nouvelUtilisateur.code_postal" name="code_postal" class="form-control" placeholder="Code postal"/>
+      </div>
+
+      <!-- pays postal input -->
+      <div class="form-outline mb-4 col-lg-4">
+        <input type="text" [(ngModel)]="nouvelUtilisateur.pays" name="pays" class="form-control" placeholder="Pays"/>
+      </div>
+    </div>
+
+
+    <div class="text-center">
+      <div class="col">
+        <!-- Simple link -->
+        <a href="#!">Mot de passe oublier</a>
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary btn-block mb-4 mt-4">Inscription</button>
+    </div>
+  </form>
+
+  <!-- Register buttons -->
+  <div class="text-center">
+    <p>Déja membre ? <a [routerLink]="'/connexion'">Se connecter</a></p>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+/* Import des polices d'écritures */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body{
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.square-checkbox {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+i {
+  font-size: 25px;
+  text-align: center;
+}
+
+.logo {
+  width: 70px;
+  display: block;
+  margin: 0 auto;
+}

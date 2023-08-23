@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body{
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+/* Style section produits */
+.product-item {
+  width: 160px;
+  height: auto;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+
+
+.product-image {
+  max-width: 100%;
+  height: 120px; /* Ajustez cette valeur selon vos préférences */
+  object-fit: cover; /* Évite la distorsion de l'image en maintenant son rapport d'aspect */
+}
+
+@media (max-width: 768px) {
+  .product-image {
+    height: 150px; /* Ajustez cette valeur selon vos préférences */
+  }
+}
+
+.product-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.product-name {
+  font-weight: bold;
+}
+
+.separator {
+  width: 80%;
+  margin: 10px auto;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.product-category {
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+/* Ajoutez cette règle pour les écrans laptop (1024px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .col-lg-2.mb-4 {
+    flex: 0 0 20%;
+    max-width: 20%;
+    margin-bottom: 20px; /* Ajout de marge inférieure */
+  }
+}
+
+/* Ajoutez cette règle pour les écrans mobiles de taille S */
+@media (max-width: 576px) {
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .col-6.mb-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 10px; /* Ajout de marge inférieure */
+  }
+}
+
+/* Ajoutez cette règle pour les écrans mobiles de taille S (320px) */
+@media (max-width: 320px) {
+  .col-6.mb-4 {
+    flex: 0 0 100%; /* Occupe toute la largeur */
+    max-width: 100%;
+    margin-bottom: 20px; /* Ajout de marge inférieure */
+  }
+}
+
+

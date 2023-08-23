@@ -23,6 +23,11 @@
   margin-left: 10px;
 }
 
+.logo img {
+  width: 50px;
+  height: auto;
+}
+
 .burger-menu,
 .navbar-nav a.nav-link{
   background-color: rgba(37, 37, 37, 1);
