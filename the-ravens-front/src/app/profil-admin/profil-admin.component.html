@@ -19,7 +19,7 @@
     <div class="col-md-6">
       <!-- FORMULAIRE D'AJOUT DE PRODUIT -->
       <h3>Ajouter un produit</h3>
-      <form class="my-form" (ngSubmit)="ajoutProduit()">
+      <!--<form class="my-form" (ngSubmit)="ajoutProduit()">
         <label class="form-label">Nom:</label>
         <input class="form-control" name="nom" [(ngModel)]="nouveauProduit.nom" required/>
 
@@ -30,12 +30,37 @@
         <textarea class="form-control description" name="description" [(ngModel)]="nouveauProduit.description" required></textarea>
 
         <label class="form-label">Photo:</label>
-        <input class="form-control" type="file" name="photo_produit" [(ngModel)]="nouveauProduit.photo_produit" (change)="onFileChange($event)" required/>
+        <input class="form-control" type="text" name="photo_produit" [(ngModel)]="nouveauProduit.photoProduit" required/>
 
         <label class="form-label">Catégorie:</label>
-        <select class="form-control" name="id_categories" [(ngModel)]="nouveauProduit.id_categories">
+        <select class="form-control" name="id_categories" [(ngModel)]="nouveauProduit.idCategories">
           <option value="" disabled selected>Choisissez une catégorie</option>
-          <option *ngFor="let categories of categories" [value]="categories.id" required>{{ categories.nom }}</option>
+          <option *ngFor="let cat of categories" [value]="cat" required>{{ cat.nom }}</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary mt-3">Ajouter Produit</button>
+      </form>-->
+
+
+
+
+      <form class="my-form" [formGroup]="produitsFormGroup" (ngSubmit)="ajoutProduit()">
+        <label class="form-label">Nom:</label>
+        <input type="text" class="form-control" name="nom" formControlName="nom" required/>
+
+        <label class="form-label">Prix:</label>
+        <input type="number" class="form-control" name="prix" formControlName="prix" required/>
+
+        <label class="form-label">Description:</label>
+        <textarea class="form-control description" name="description" formControlName="description" required></textarea>
+
+        <label class="form-label">Photo:</label>
+        <input class="form-control" type="text" name="photo_produit" formControlName="photoProduit" required/>
+
+        <label class="form-label">Catégorie:</label>
+        <select class="form-control" name="id_categories" formControlName="idCategories">
+          <option value="" disabled selected>Choisissez une catégorie</option>
+          <option *ngFor="let cat of categories" [ngValue]="cat" required>{{ cat.nom }}</option>
         </select>
 
         <button type="submit" class="btn btn-primary mt-3">Ajouter Produit</button>
@@ -46,41 +71,47 @@
 
   <!-- Affichage de la liste des des catégories -->
   <h3 class="user-list">Liste des catégories</h3>
-  <table class="table" *ngIf="!categorieEnCoursEdition">
-    <thead>
-    <tr>
-      <th>Identifiant</th>
-      <th>Nom</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let categories of categories">
-      <td>{{categories.id}}</td>
-      <td>{{categories.nom}}</td>
-      <td><button class="btn btn-secondary btn-sm" (click)="openEditFormCategorie(categories)">Editer</button></td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table class="table" *ngIf="!categorieEnCoursEdition">
+      <thead>
+      <tr>
+        <th>Identifiant</th>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let categories of categories">
+        <td>{{categories.id}}</td>
+        <td>{{categories.nom}}</td>
+        <td><button class="btn btn-secondary btn-sm" (click)="openEditFormCategorie(categories)">Editer</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
 
   <!-- Formulaire d'édition categorie -->
   <div class="edit-user-form mb-4" *ngIf="categorieEnCoursEdition">
     <h3 class="edit-user-title">Edition de la catégorie</h3>
     <form class="edit-user-form">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Identifiant</th>
-          <th>Nom</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let categories of categories">
-          <td>{{categories.id}}</td>
-          <td>{{categories.nom}}</td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="table-container">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Identifiant</th>
+            <th>Nom</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let categories of categories">
+            <td>{{categories.id}}</td>
+            <td>{{categories.nom}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div class="form-group">
         <label>Nouveau Nom:</label>
         <input type="text" class="form-control" [(ngModel)]="categorieEditee.nom" name="nom"/>
@@ -101,65 +132,70 @@
   <div class="search-bar">
     <input type="text" [(ngModel)]="barreRechercheProduits" (input)="searchProducts()" placeholder="Rechercher des produits...">
   </div>
-
-  <table class="table" *ngIf="!produitEnCoursEdition">
-    <thead>
-    <tr>
-      <th>Identifiant</th>
-      <th>Nom</th>
-      <th>Prix</th>
-      <th>Description</th>
-      <th>Photo</th>
-      <th>Identifiant catégorie</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <ng-container *ngFor="let produit of produits; let i = index">
-      <tr *ngIf="(i < nbProduitsAffiches || barreRechercheProduits) && (produitsFiltres.includes(produit) || !barreRechercheProduits)" (click)="openEditFormProduit(produit)">
-        <td>{{produit.id}}</td>
-        <td>{{produit.nom}}</td>
-        <td>{{produit.prix}}</td>
-        <td>{{produit.description}}</td>
-        <td>{{produit.photo_produit}}</td>
-        <td>{{produit.id_categories}}</td>
-        <td><button class="btn btn-secondary btn-sm" (click)="openEditFormProduit(produit)">Editer</button></td>
+  <div class="table-container">
+    <table class="table" *ngIf="!produitEnCoursEdition">
+      <thead>
+      <tr>
+        <th>Identifiant</th>
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Description</th>
+        <th>Photo</th>
+        <th>Identifiant catégorie</th>
+        <th>Action</th>
       </tr>
-    </ng-container>
-    </tbody>
-    <div *ngIf="nbProduitsAffiches < produits.length">
-      <button class="btn btn-primary mt-3" (click)="showMoreRows()">Voir plus</button>
-    </div>
-  </table>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let produit of produits; let i = index">
+        <tr *ngIf="(i < nbProduitsAffiches || barreRechercheProduits) && (produitsFiltres.includes(produit) || !barreRechercheProduits)" (click)="openEditFormProduit(produit)">
+          <td>{{produit.id}}</td>
+          <td>{{produit.nom}}</td>
+          <td>{{produit.prix}}</td>
+          <td>{{produit.description}}</td>
+          <td>{{produit.photoProduit}}</td>
+          <td>{{produit.idCategories}}</td>
+          <td><button class="btn btn-secondary btn-sm" (click)="openEditFormProduit(produit)">Editer</button></td>
+        </tr>
+      </ng-container>
+      </tbody>
+      <div *ngIf="nbProduitsAffiches < produits.length">
+        <button class="btn btn-primary mt-3" (click)="showMoreRows()">Voir plus</button>
+      </div>
+    </table>
+  </div>
+
 
   <!-- Formulaire d'édition produits -->
   <div class="edit-user-form mb-4" *ngIf="produitEnCoursEdition">
     <h3 class="edit-user-title">Edition du produit</h3>
     <form class="edit-user-form">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Identifiant</th>
-          <th>Nom</th>
-          <th>Prix</th>
-          <th>Description</th>
-          <th>Photo</th>
-          <th>Identifiant catégorie</th>
-        </tr>
-        </thead>
-        <tbody>
+      <div class="table-container">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Identifiant</th>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Description</th>
+            <th>Photo</th>
+            <th>Identifiant catégorie</th>
+          </tr>
+          </thead>
+          <tbody>
           <ng-container *ngFor="let produit of produits">
             <tr *ngIf="produit.id === selectedProduitId">
               <td>{{produit.id}}</td>
               <td>{{produit.nom}}</td>
               <td>{{produit.prix}}</td>
               <td>{{produit.description}}</td>
-              <td>{{produit.photo_produit}}</td>
-              <td>{{produit.id_categories}}</td>
+              <td>{{produit.photoProduit}}</td>
+              <td>{{produit.idCategories}}</td>
             </tr>
           </ng-container>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
+
       <div class="form-group">
         <div class="row">
           <div class="col-lg-3">
@@ -176,7 +212,7 @@
           </div>
           <div class="col-lg-3">
             <label>Nouvelle photo:</label>
-            <input type="file" class="form-control" [(ngModel)]="produitEdite.photo_produit" name="photo"/>
+            <input type="text" class="form-control" [(ngModel)]="produitEdite.photoProduit" name="photo"/>
           </div>
         </div>
 
@@ -198,31 +234,34 @@
       <input type="text" [(ngModel)]="barreRechercheUtilisateurs" (input)="searchUsers()" placeholder="Rechercher des utilisateurs...">
     </div>
 
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Identifiant</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Rôle</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let utilisateur of utilisateurs; let i = index">
-        <tr *ngIf="(i < nbUtilisateursAffiches || barreRechercheUtilisateurs) && (utilisateursFiltres.includes(utilisateur) || !barreRechercheUtilisateurs)">
-          <td>{{ utilisateur.id }}</td>
-          <td>{{ utilisateur.nom }}</td>
-          <td>{{ utilisateur.prenom }}</td>
-          <td>{{ utilisateur.role }}</td>
-          <td><button class="btn btn-secondary btn-sm" (click)="openEditForm(utilisateur)">Editer</button></td>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Identifiant</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Rôle</th>
+          <th>Actions</th>
         </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let utilisateur of utilisateurs; let i = index">
+          <tr *ngIf="(i < nbUtilisateursAffiches || barreRechercheUtilisateurs) && (utilisateursFiltres.includes(utilisateur) || !barreRechercheUtilisateurs)">
+            <td>{{ utilisateur.id }}</td>
+            <td>{{ utilisateur.nom }}</td>
+            <td>{{ utilisateur.prenom }}</td>
+            <td>{{ utilisateur.role }}</td>
+            <td><button class="btn btn-secondary btn-sm" (click)="openEditForm(utilisateur)">Editer</button></td>
+          </tr>
         </ng-container>
-      </tbody>
-      <div *ngIf="nbUtilisateursAffiches < utilisateursFiltres.length">
-        <button class="btn btn-primary mt-3" (click)="showMoreUsers()">Voir plus d'utilisateurs</button>
-      </div>
-    </table>
+        </tbody>
+        <div *ngIf="nbUtilisateursAffiches < utilisateursFiltres.length">
+          <button class="btn btn-primary mt-3" (click)="showMoreUsers()">Voir plus d'utilisateurs</button>
+        </div>
+      </table>
+    </div>
+
   </div>
 
 
@@ -231,27 +270,30 @@
   <div *ngIf="utilisateurEnCoursEdition && utilisateurEdite" class="edit-user-form mb-4">
     <h3 class="edit-user-title">Edition de l'utilisateur</h3>
     <form class="edit-user-form">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Identifiant</th>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Rôle</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>{{ utilisateurEdite.id }}</td>
-          <td>{{ utilisateurEdite.nom }}</td>
-          <td>{{ utilisateurEdite.prenom }}</td>
-          <td>{{ utilisateurEdite.role }}</td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="table-container">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Identifiant</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Rôle</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>{{ utilisateurEdite.id }}</td>
+            <td>{{ utilisateurEdite.nom }}</td>
+            <td>{{ utilisateurEdite.prenom }}</td>
+            <td>{{ utilisateurEdite.role }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div class="form-group">
         <label for="editedUtilisateurRole">Nouveau rôle:</label>
-        <select class="form-control" id="editedUtilisateurRole" name="editedUtilisateurRole" [(ngModel)]="utilisateurEdite.role">
+        <select class="form-select" id="editedUtilisateurRole" name="editedUtilisateurRole" [(ngModel)]="utilisateurEdite.role">
           <option value="Client">Client</option>
           <option value="Admin">Admin</option>
         </select>

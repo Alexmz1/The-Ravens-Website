@@ -4,10 +4,10 @@ export interface Utilisateur {
   prenom : string;
   email : string;
   mdp : string;
-  num_rue : string;
+  numRue : string;
   rue : string;
   ville : string;
-  code_postal : string;
+  codePostal : string;
   pays : string;
   role : string;
   token : string;

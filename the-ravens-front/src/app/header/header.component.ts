@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 import {UtilisateurService} from "../service/utilisateur.service";
 import {ConnexionService} from "../service/connexion.service";
-import {AuthentificationService} from "../service/authentification.service";
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -10,7 +10,20 @@ import {AuthentificationService} from "../service/authentification.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor() {}
+  constructor(private connexionService: ConnexionService) {}
+
+  utilisateurAuthentifie(): boolean {
+    return this.connexionService.id !== null;
+  }
+
+  utilisateurClient(): boolean {
+    return this.connexionService.role === 'Client';
+  }
+
+  utilisateurAdmin(): boolean {
+    return this.connexionService.role === 'Admin';
+  }
+
 
   menuBurgerOuvert = false;
 

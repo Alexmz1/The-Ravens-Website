@@ -63,6 +63,11 @@
 
 /* Style tableau utilisateur */
 /* Dans votre fichier CSS ou via les balises <style> dans le composant */
+.table-container {
+  overflow-x: auto; /* Add horizontal scrollbar when table overflows */
+  max-width: 100%;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -78,7 +83,6 @@
 .table th {
   background-color: #f8f9fa;
 }
-
 
 
 /* Stylisation de la barre de recherche */
@@ -104,5 +108,20 @@
 
 .search-bar input::placeholder {
   color: #999;
+}
+
+
+/* Media query for small screens */
+@media screen and (max-width: 768px) {
+  .table th,
+  .table td {
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+
+  /* Add scrollbar for small screens */
+  .table-container {
+    overflow-y: auto; /* Add vertical scrollbar when table content overflows */
+    max-height: 300px; /* Set a maximum height for the table */
+  }
 }
 

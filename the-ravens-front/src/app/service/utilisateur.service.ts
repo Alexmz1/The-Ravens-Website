@@ -18,6 +18,10 @@ export class UtilisateurService {
     return this.http.get<any[]>(this.baseURL + "/ws/utilisateur/all");
   }
 
+  getUtilisateursById(id: number): Observable<any[]> {
+    return this.http.get<any[]>(this.baseURL + `/ws/utilisateur/${id}`);
+  }
+
 
   // Modifier le role utilisateur
   updateUtilisateur(utilisateur: any): Observable<any> {

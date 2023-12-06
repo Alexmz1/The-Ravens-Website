@@ -1,0 +1,24 @@
+.image {
+  width: 150px;
+  height: auto;
+}
+
+hr {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.poubelle-btn {
+  border: none;
+  background-color: white;
+}
+
+.paiement-btn {
+  border: none;
+  background-color: white;
+  background-color: black; /* Couleur de fond */
+  color: white;
+  padding: 10px;
+}
+
+

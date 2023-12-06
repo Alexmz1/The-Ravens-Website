@@ -1,6 +1,6 @@
 export interface Commande {
   id : number;
-  date_commande : string;
+  dateCommande : string;
   total : number;
-  id_utilisateurs : number;
+  idUtilisateurs : number;
 }

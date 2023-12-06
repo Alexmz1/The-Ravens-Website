@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProduitService} from "../service/produit.service";
+import {PanierService} from "../service/panier.service";
 
 @Component({
   selector: 'app-produits-details',
@@ -10,8 +11,11 @@ import {ProduitService} from "../service/produit.service";
 export class ProduitsDetailsComponent {
 
   produit: any;
+  quantite: number = 1; // Default quantity
+  taille: string = "small"; // Default size
 
-  constructor(private route: ActivatedRoute, private produitService: ProduitService) { }
+  constructor(private route: ActivatedRoute, private produitService: ProduitService,
+              private panierService: PanierService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -26,5 +30,9 @@ export class ProduitsDetailsComponent {
         }
       );
     });
+  }
+
+  ajoutAuPanier(produit: any) {
+    this.panierService.ajoutAuPanier(produit, this.quantite, this.taille);
   }
 }

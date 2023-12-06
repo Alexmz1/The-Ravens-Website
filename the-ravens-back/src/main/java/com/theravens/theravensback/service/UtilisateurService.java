@@ -1,11 +1,10 @@
 package com.theravens.theravensback.service;
 
 import com.theravens.theravensback.UtilisateurLogin;
+import com.theravens.theravensback.model.Produit;
 import com.theravens.theravensback.model.Utilisateur;
 import com.theravens.theravensback.repository.UtilisateurRepository;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -86,4 +85,51 @@ public class UtilisateurService {
 
         return null; // Ou générer une exception appropriée si l'utilisateur n'existe pas
     }
+
+    public Utilisateur getUtilisateurById(Integer id){
+        return utilisateurRepository.findById(id).orElse(null);
+    }
+
+
+
+
+
+    /*@Value("${jwt.secret}")
+    private String jwtSecret;
+
+    @Value("${jwt.expiration}")
+    private Long jwtExpiration;
+
+    // ...
+
+    public String generateToken(Utilisateur utilisateur) {
+        Claims claims = Jwts.claims();
+        claims.put("id", utilisateur.getId());
+        claims.put("email", utilisateur.getEmail());
+        claims.put("role", utilisateur.getRole());
+
+        Date now = new Date();
+        Date expiration = new Date(now.getTime() + jwtExpiration);
+
+        String token = Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(expiration)
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
+
+        return token;
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            // Essayez de parser le token JWT en utilisant la clé secrète
+            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
+            return true;
+        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException ex) {
+            // Une exception sera levée si le token est invalide
+            // Vous pouvez gérer les exceptions de manière appropriée ici
+            return false;
+        }
+    }*/
 }

@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="invoice">
+    <div class="row">
+      <div class="col-7">
+        <img src="./assets/images/Logo-thr-noir.png" class="logo"/>
+      </div>
+      <div class="col-5">
+        <h1 class="document-type display-4">FACTURE</h1>
+        <p class="text-right"><strong>Référence de la commande</strong></p>
+        <p><strong></strong></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-7">
+        <p class="addressMySam">
+          <strong>The Ravens</strong><br/>
+          65 avenue des Champs-Elysées<br/>
+          75008 Paris
+        </p>
+      </div>
+      <div class="col-5">
+        <br/><br/><br/>
+        <p class="addressDriver">
+          <strong>Infos client</strong><br/>
+          Réf. Client <em>Référence client</em><br/>
+          <span>Prénom</span>
+          <span>NOM</span><br/>
+          <span>adresse</span><br/>
+          <span>code postal</span>
+          <span>VILLE</span><br/>
+          <span>Pays</span>
+        </p>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <h6>Commande passée le <span>date</span> sur le site <a [routerLink]="''" style="color: black;">The Ravens</a>
+    </h6>
+    <br/>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Nom de l'article</th>
+        <th>Référence art.</th>
+        <th>Taille</th>
+        <th>Quantité</th>
+        <th class="text-right">Prix unitaire HT</th>
+        <th>TVA</th>
+        <th class="text-right">Prix TTC</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr  *ngFor="let produit of lignesCommandesProduits">
+        <td>{{produit.nom}}</td>
+        <td>{{produit.id}}</td>
+        <td>{{produit.taille}}</td>
+        <td>{{produit.quantite}}</td>
+        <td class="text-right">{{produit.prix}}€</td>
+        <td>20%</td>
+        <td class="text-right">{{calculerPrixTotalLigne(produit)}}€</td>
+      </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 10px;">La TVA est comprise dans le prix unitaire du produit HT</p>
+    <div class="row">
+      <div class="col-8">
+      </div>
+      <div class="col-4">
+        <table class="table table-sm text-right">
+          <tr>
+            <td><strong>Total HT</strong></td>
+            <td class="text-right">{{calculerPrixTotal()}}€</td>
+          </tr>
+          <tr>
+            <td>TVA 20% (comprise)</td>
+          </tr>
+          <tr>
+            <td><strong>Total TTC</strong></td>
+            <td class="text-right">{{calculerPrixTotal()}}€</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <p class="conditions">
+      Nous vous remercions de nous avoir fait confiance et d'avoir passé commande sur notre site.
+      <br/><br/>
+      Type de paiement :
+    </p>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <p class="bottom-page text-right">
+      The Ravens - N° SIRET 75123456789012 RCS PARIS<br/>
+      65, avenue des Champs-Elysées - 75008 PARIS 06 00 00 00 00 - <a [routerLink]="''">www.the-ravens.com</a><br/>
+    </p>
+  </div>
+</div>

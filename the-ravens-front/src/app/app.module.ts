@@ -12,10 +12,13 @@ import { ProduitsDetailsComponent } from './produits-details/produits-details.co
 import { InscriptionComponent } from './inscription/inscription.component';
 import {HttpClientModule} from "@angular/common/http";
 import { ConnexionComponent } from './connexion/connexion.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ProfilClientComponent } from './profil-client/profil-client.component';
 import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
 import { PanierComponent } from './panier/panier.component';
+import { CommandeComponent } from './commande/commande.component';
+import { CommandeLignesComponent } from './commande-lignes/commande-lignes.component';
+import { NousDecouvrirComponent } from './nous-decouvrir/nous-decouvrir.component';
 
 @NgModule({
   declarations: [
@@ -31,13 +34,17 @@ import { PanierComponent } from './panier/panier.component';
     ProfilClientComponent,
     ProfilAdminComponent,
     PanierComponent,
+    CommandeComponent,
+    CommandeLignesComponent,
+    NousDecouvrirComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

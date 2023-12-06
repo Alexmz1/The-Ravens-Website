@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,6 +14,7 @@ import java.time.Instant;
 @Table(name = "commandes")
 public class Commande {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Utilisation de l'auto-incrémentation pour générer l'ID
     @Column(name = "id", nullable = false)
     private Integer id;
 

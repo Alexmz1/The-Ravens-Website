@@ -9,6 +9,8 @@ import {MessageClientService} from "../service/message-client.service";
 })
 export class ContactComponent {
 
+  messageEnvoye: boolean = false;
+
   messageData = {
     nom: '',
     prenom: '',
@@ -37,5 +39,8 @@ export class ContactComponent {
         console.error('Erreur lors de l\'envoi des données à la BDD', error);
       }
     );
+
+    // Envoie du message réalisé
+    this.messageEnvoye = true;
   }
 }

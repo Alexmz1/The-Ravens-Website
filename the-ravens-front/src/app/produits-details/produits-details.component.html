@@ -1,39 +1,54 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-6">
-      <img src="{{produit.photo_produit}}" class="img-fluid" alt="Image du Produit">
+      <img src="{{produit?.photoProduit}}" class="img-fluid" alt="Image du Produit">
     </div>
     <div class="col-md-6">
       <div class="d-flex justify-content-between align-items-center">
-        <h2>{{produit.nom}}</h2>
-        <h2 class="text-end">{{produit.prix}} €</h2>
+        <h2>{{produit?.nom}}</h2>
+        <h2 class="text-end">{{produit?.prix}} €</h2>
       </div>
       <div class="mt-4">
         <h3>Taille</h3>
         <div class="d-flex">
-          <div class="form-check me-3">
-            <input class="form-check-input" type="radio" name="taille" id="tailleS" value="S">
-            <label class="form-check-label" for="tailleS">S</label>
-          </div>
-          <div class="form-check me-3">
-            <input class="form-check-input" type="radio" name="taille" id="tailleM" value="M">
-            <label class="form-check-label" for="tailleM">M</label>
-          </div>
-          <div class="form-check me-3">
-            <input class="form-check-input" type="radio" name="taille" id="tailleL" value="L">
-            <label class="form-check-label" for="tailleL">L</label>
+          <div class="taille-options">
+            <label class="taille-option">
+              <input type="radio" name="size" value="small" [(ngModel)]="taille">
+              <span class="checkbox-custom">S</span>
+            </label>
+            <label class="taille-option">
+              <input type="radio" name="size" value="medium" [(ngModel)]="taille">
+              <span class="checkbox-custom">M</span>
+            </label>
+            <label class="taille-option">
+              <input type="radio" name="size" value="large" [(ngModel)]="taille">
+              <span class="checkbox-custom">L</span>
+            </label>
           </div>
         </div>
-        <button class="btn ms-auto mt-2"><i class='bx bx-cart-add'></i></button>
+        <div class="mt-4">
+          <h4>Quantité</h4>
+          <div class="input-group">
+            <select class="form-select barre-select" id="quantite" [(ngModel)]="quantite">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <!-- Vous pouvez ajouter plus d'options ici -->
+            </select>
+          </div>
+        </div>
+        <button class="panier-btn d-flex align-items-center justify-content-center mt-4 p-2 gap-2" (click)="ajoutAuPanier(produit)"><i class='bx bx-cart-add' style="font-size: 20px;"></i>Ajouter au panier</button>
       </div>
       <div class="mt-4">
-        <h6>Description</h6>
-        <p>{{produit.description}}</p>
+        <h6><strong>Description</strong></h6>
+        <p>{{produit?.description}}</p>
       </div>
       <div class="mt-4">
         <h6>
           <a data-bs-toggle="collapse" href="#guideTailles" role="button" aria-expanded="false" aria-controls="guideTailles" style="text-decoration: none; color: black;">
-            Guide des Tailles <i class="fas fa-chevron-down"></i>
+            Guide des Tailles <i class='bx bxs-down-arrow'></i>
           </a>
         </h6>
         <div class="collapse" id="guideTailles">

@@ -1,8 +1,10 @@
+import {Categorie} from "./categorie";
+
 export interface Produit {
-  id : number;
+  id : number | undefined;
   nom : string;
   prix : number;
   description : string;
-  photo_produit : File;
-  id_categories : number;
+  photoProduit : string;
+  idCategories : Categorie | undefined;
 }

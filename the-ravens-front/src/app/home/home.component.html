@@ -1,11 +1,11 @@
 <main>
   <section class="banner">
-    <img src="./assets/images/banniere-ecommerce.avif" alt="Image de la dernière collection">
-    <div class="banner-content">
+    <img src="./assets/images/banniere-png.png" alt="Image de la dernière collection">
+    <!--<div class="banner-content">
       <h2>Nom de la collection</h2>
       <p>Description de la collection</p>
       <a href="#"><button>Découvrir</button></a>
-    </div>
+    </div>-->
   </section>
 
   <div class="d-flex justify-content-center align-items-center">
@@ -13,75 +13,25 @@
     <h2>Nos produits</h2>
 
     <div class="d-flex flex-column align-items-center">
-      <div class="mt-4">
-        <div class="row justify-content-center">
-          <div class="col-md-4 col-sm-6">
-            <a [routerLink]="'produits'">
-              <div class="products-items">
-                <img src="./assets/images/produit-img.webp" alt="produit 1" class="products-img">
-                <div class="products-details">
-                  <div class="product-name">Montre</div>
-                  <div class="product-price">100 €</div>
-                </div>
-                <hr class="separator">
-                <div class="product-category">Accessoires</div>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-4 col-sm-6">
-            <a [routerLink]="'produits'">
-              <div class="products-items">
-                <img src="./assets/images/produit-img.webp" alt="produit 1" class="products-img">
-                <div class="products-details">
-                  <div class="product-name">Montre</div>
-                  <div class="product-price">100 €</div>
-                </div>
-                <hr class="separator">
-                <div class="product-category">Accessoires</div>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-4 col-sm-6">
-            <a [routerLink]="'produits'">
-              <div class="products-items">
-                <img src="./assets/images/produit-img.webp" alt="produit 1" class="products-img">
-                <div class="products-details">
-                  <div class="product-name">Montre</div>
-                  <div class="product-price">100 €</div>
-                </div>
-                <hr class="separator">
-                <div class="product-category">Accessoires</div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-
       <div class="d-flex flex-column align-items-center">
         <div class="mt-4">
           <div class="row justify-content-center">
             <div class="col-md-4 col-sm-6" *ngFor="let produit of derniersProduits; let i = index" [ngClass]="{'d-none': i >= 3}">
               <a [routerLink]="['produits', produit.id]">
                 <div class="products-items">
-                  <img src="{{produit.photo_produit}}" alt="produit {{produit.id}}" class="products-img">
+                  <img src="{{produit?.photoProduit}}" alt="produit {{produit.id}}" class="products-img">
                   <div class="products-details">
                     <div class="product-name">{{ produit.nom }}</div>
                     <div class="product-price">{{ produit.prix }} €</div>
                   </div>
                   <hr class="separator">
-                  <div class="product-category">{{ produit.categories }}</div>
+                  <div class="product-category">{{ produit.idCategorie?.nom}}</div>
                 </div>
               </a>
             </div>
           </div>
         </div>
       </div>
-
-
-
 
       <a [routerLink]="'nos-produits'"><button class="mt-4">Découvrir plus</button></a>
     </div>

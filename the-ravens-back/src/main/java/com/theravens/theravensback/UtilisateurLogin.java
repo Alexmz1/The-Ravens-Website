@@ -1,15 +1,25 @@
 package com.theravens.theravensback;
 
 public class UtilisateurLogin {
+    private Integer id;
     private String email;
     private String mdp;
     private String role;
 
-    public UtilisateurLogin(String email, String mdp, String role) {
+    public UtilisateurLogin(Integer id, String email, String mdp, String role) {
+        this.id = id;
         this.email = email;
         this.mdp = mdp;
         this.role = role;
     }
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }

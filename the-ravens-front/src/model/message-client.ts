@@ -4,5 +4,5 @@ export interface MessageClient {
   prenom : string;
   email : string;
   message : string;
-  id_utilisateurs : number;
+  idUtilisateurs : number;
 }

@@ -1,90 +1,44 @@
 <section class="container products mt-5 text-center">
   <h2 class="mb-4">Tous les produits</h2>
+
   <div class="row">
-    <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
-      <a [routerLink]="'produits'">
-        <div class="product-item">
-          <img class="product-image" src="./assets/images/produit-img.webp" alt="Produit 1">
-          <div class="product-details">
-            <div class="product-name">Montre</div>
-            <div class="product-price">100 €</div>
-          </div>
-          <hr class="separator">
-          <div class="product-category">Accessoires</div>
-        </div>
-      </a>
-    </div>
-
-    <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
-      <div class="product-item">
-        <img class="product-image" src="./assets/images/Bape-sneakers.png" alt="Produit 1">
-        <div class="product-details">
-          <div class="product-name">Montre</div>
-          <div class="product-price">100 €</div>
-        </div>
-        <hr class="separator">
-        <div class="product-category">Accessoires</div>
+    <div class="col-md-12">
+      <!-- Barre de recherche -->
+      <div class="search-bar">
+        <input class="mb-3 form-control-sm" type="text" [(ngModel)]="barreRechercheProduit" (input)="rechercheProduit()" placeholder="Recherche">
       </div>
     </div>
-
-    <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
-      <div class="product-item">
-        <img class="product-image" src="./assets/images/produit-img.webp" alt="Produit 1">
-        <div class="product-details">
-          <div class="product-name">Montre</div>
-          <div class="product-price">100 €</div>
-        </div>
-        <hr class="separator">
-        <div class="product-category">Accessoires</div>
+    <div class="col-md-12">
+      <div class="mb-3">
+        <select [(ngModel)]="selectedCategorie" class="form-control tri-prix" (ngModelChange)="filtrerProduitsParCategorie()">
+          <option value="" selected>Toutes les catégories</option>
+          <option *ngFor="let categorie of categories" [ngValue]="categorie.id">{{ categorie.nom }}</option>
+        </select>
       </div>
     </div>
+  </div>
 
-    <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
-      <div class="product-item">
-        <img class="product-image" src="./assets/images/produit-img.webp" alt="Produit 1">
-        <div class="product-details">
-          <div class="product-name">Montre</div>
-          <div class="product-price">100 €</div>
-        </div>
-        <hr class="separator">
-        <div class="product-category">Accessoires</div>
-      </div>
-    </div>
 
-    <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
-      <div class="product-item">
-        <img class="product-image" src="./assets/images/produit-img.webp" alt="Produit 1">
-        <div class="product-details">
-          <div class="product-name">Montre</div>
-          <div class="product-price">100 €</div>
-        </div>
-        <hr class="separator">
-        <div class="product-category">Accessoires</div>
-      </div>
-    </div>
 
-    <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
-      <div class="product-item">
-        <img class="product-image" src="./assets/images/produit-img.webp" alt="Produit 1">
-        <div class="product-details">
-          <div class="product-name">Montre</div>
-          <div class="product-price">100 €</div>
-        </div>
-        <hr class="separator">
-        <div class="product-category">Accessoires</div>
-      </div>
-    </div>
 
-    <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
-      <div class="product-item">
-        <img class="product-image" src="./assets/images/produit-img.webp" alt="Produit 1">
-        <div class="product-details">
-          <div class="product-name">Montre</div>
-          <div class="product-price">100 €</div>
+  <div class="row">
+    <ng-container *ngFor="let produit of produits">
+      <ng-container *ngIf="barreRechercheProduit === '' || produit.nom.toLowerCase().includes(barreRechercheProduit.toLowerCase())">
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
+          <a [routerLink]="['produits', produit.id]">
+            <div class="product-item">
+              <img class="product-image" src="{{produit?.photoProduit}}" alt="Produit">
+              <div class="product-details">
+                <div class="product-name">{{produit.nom}}</div>
+                <div class="product-price">{{produit.prix}} €</div>
+              </div>
+              <hr class="separator">
+              <div class="product-category">{{produit.categorie}}</div>
+            </div>
+          </a>
         </div>
-        <hr class="separator">
-        <div class="product-category">Accessoires</div>
-      </div>
-    </div>
+      </ng-container>
+    </ng-container>
+
   </div>
 </section>

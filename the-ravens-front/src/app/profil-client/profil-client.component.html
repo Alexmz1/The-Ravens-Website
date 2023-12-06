@@ -5,60 +5,124 @@
       <h1>Mon Profil</h1>
     </div>
 
-    <div class="col-6">
-      <button class="btn btn-primary float-end">Déconnexion</button>
+      <div class="col-6">
+        <button class="btn btn-primary float-end">Déconnexion</button>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 infos">
+          <h2>Informations personnelles</h2>
+          <div *ngIf="utilisateur">
+            <p>Prénom et nom: {{utilisateur.prenom}} {{utilisateur.nom}}</p>
+            <p>Email: {{utilisateur.email}}</p>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <h2>Historique des commandes</h2>
+          <div *ngIf="utilisateur">
+            <ul>
+              <li>Commande #12345 - Date: 2023-07-15, Montant: $150</li>
+              <li>Commande #67890 - Date: 2023-06-28, Montant: $200</li>
+              <!-- Ajoutez d'autres commandes ici -->
+            </ul>
+          </div>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col-md-6 adresse">
+            <h2>Adresse de livraison</h2>
+            <div *ngIf="utilisateur">
+              <!-- Affichez l'adresse de livraison du client ici -->
+              <p>{{utilisateur.num_rue}} {{utilisateur.rue}}</p>
+              <p>{{utilisateur.ville}}</p>
+              <p>{{utilisateur.code_postal}}</p>
+              <p>{{utilisateur.pays}}</p>
+              <!-- Ajoutez d'autres détails d'adresse ici -->
+            </div>
+            <button class="btn btn-secondary btn-sm" (click)="openEditForm(utilisateur)">Editer</button>
+          </div>
+
+          <!-- Formulaire d'édition adresse -->
+          <div *ngIf="adresseLivraisonEnCoursEdition && adresseLivraisonEdite" class="edit-user-form mb-4">
+            <h3 class="edit-user-title">Edition de l'utilisateur</h3>
+            <form class="edit-user-form">
+              <div class="table-container">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Numéro de rue</th>
+                    <th>Rue</th>
+                    <th>Ville</th>
+                    <th>Code postal</th>
+                    <th>Pays</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>{{ adresseLivraisonEdite.num_rue }}</td>
+                    <td>{{ adresseLivraisonEdite.rue }}</td>
+                    <td>{{ adresseLivraisonEdite.ville }}</td>
+                    <td>{{ adresseLivraisonEdite.code_postal }}</td>
+                    <td>{{ adresseLivraisonEdite.pays }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label>Nouveau numéro de rue:</label>
+                    <input type="text" class="form-control" [(ngModel)]="adresseLivraisonEdite.num_rue" name="num_rue"/>
+                  </div>
+                  <div class="col-lg-3">
+                    <label>Nouvelle rue:</label>
+                    <input type="text" class="form-control" [(ngModel)]="adresseLivraisonEdite.rue" name="rue"/>
+                  </div>
+                  <div class="col-lg-3">
+                    <label>Nouvelle ville:</label>
+                    <input type="text" class="form-control" [(ngModel)]="adresseLivraisonEdite.ville" name="ville"/>
+                  </div>
+                  <div class="col-lg-3">
+                    <label>Nouveau code postal:</label>
+                    <input type="text" class="form-control" [(ngModel)]="adresseLivraisonEdite.code_postal" name="code_postal"/>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <label>Nouveau pays:</label>
+                    <input type="text" class="form-control" [(ngModel)]="adresseLivraisonEdite.pays" name="pays"/>
+                  </div>
+                </div>
+
+              </div>
+              <button type="submit" class="btn btn-primary" (click)="saveEditedAdresseLivraison()">Sauvegarder</button>
+              <button type="button" class="btn btn-secondary" (click)="closeEditForm()">Annuler</button>
+            </form>
+          </div>
+
+          <div class="col-md-6 adresse">
+            <h2>Adresse de facturation</h2>
+            <div *ngIf="utilisateur">
+              <!-- Affichez l'adresse de livraison du client ici -->
+              <p>{{utilisateur.num_rue}} {{utilisateur.rue}}</p>
+              <p>{{utilisateur.ville}}</p>
+              <p>{{utilisateur.code_postal}}</p>
+              <p>{{utilisateur.pays}}</p>
+              <!-- Ajoutez d'autres détails d'adresse ici -->
+            </div>
+          </div>
+      </div>
+
+        <h2 class="mt-5">Liste de souhaits</h2>
+        <!-- Affichez la liste de souhaits du client ici -->
+        <ul>
+          <li>Produit A</li>
+          <li>Produit B</li>
+          <!-- Ajoutez d'autres produits de la liste de souhaits ici -->
+        </ul>
+      </div>
     </div>
-  </div>
-
-
-  <div class="row">
-    <div class="col-md-6 infos">
-      <h2>Informations personnelles</h2>
-      <!-- Affichez les informations personnelles du client ici -->
-      <p>Nom: John Doe</p>
-      <p>Email: john@example.com</p>
-      <p>Téléphone: +1234567890</p>
-      <!-- Ajoutez d'autres informations personnelles ici -->
-    </div>
-    <div class="col-md-6">
-      <h2>Historique des commandes</h2>
-      <!-- Affichez l'historique des commandes passées par le client ici -->
-      <ul>
-        <li>Commande #12345 - Date: 2023-07-15, Montant: $150</li>
-        <li>Commande #67890 - Date: 2023-06-28, Montant: $200</li>
-        <!-- Ajoutez d'autres commandes ici -->
-      </ul>
-    </div>
-  </div>
-
-
-
-  <div class="row mt-5">
-    <div class="col-md-6 adresse">
-      <h2>Adresse de livraison</h2>
-      <!-- Affichez l'adresse de livraison du client ici -->
-      <p>123 Rue Principale</p>
-      <p>Ville: Villeville</p>
-      <p>Code postal: 12345</p>
-      <!-- Ajoutez d'autres détails d'adresse ici -->
-    </div>
-    <div class="col-md-6 adresse">
-      <h2>Adresse de facturation</h2>
-      <!-- Affichez l'adresse de facturation du client ici -->
-      <p>123 Rue Facturation</p>
-      <p>Ville: Factuville</p>
-      <p>Code postal: 54321</p>
-      <!-- Ajoutez d'autres détails d'adresse ici -->
-    </div>
-  </div>
-
-  <h2 class="mt-5">Liste de souhaits</h2>
-  <!-- Affichez la liste de souhaits du client ici -->
-  <ul>
-    <li>Produit A</li>
-    <li>Produit B</li>
-    <!-- Ajoutez d'autres produits de la liste de souhaits ici -->
-  </ul>
 
   <img src="./assets/images/Logo-thr-noir.png" class="logo mt-5 mb-5">
 </div>

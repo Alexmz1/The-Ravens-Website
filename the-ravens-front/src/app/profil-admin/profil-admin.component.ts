@@ -1,9 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {UtilisateurService} from "../service/utilisateur.service";
 import {Utilisateur} from "../../model/utilisateur";
-import {Observable} from "rxjs";
+import {catchError, Observable} from "rxjs";
 import {CategorieService} from "../service/categorie.service";
 import {ProduitService} from "../service/produit.service";
+import {HttpHeaders} from "@angular/common/http";
+import {ConnexionService} from "../service/connexion.service";
+import {Router} from "@angular/router";
+import {Produit} from "../../model/produit";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'app-profil-admin',
@@ -25,14 +31,37 @@ export class ProfilAdminComponent implements OnInit{
   barreRechercheUtilisateurs: string = '';
   utilisateursFiltres: any[] = [];
 
-  constructor(private utilisateurService: UtilisateurService, private categorieService: CategorieService, private produitService: ProduitService) { }
+  constructor(private utilisateurService: UtilisateurService,
+              private categorieService: CategorieService,
+              private produitService: ProduitService,
+              private connexionService: ConnexionService,
+              private router: Router,
+              private formBuilder : FormBuilder,
+              private authService : AuthService) { }
+
+  /*logout() {
+    // Déconnectez l'utilisateur en supprimant le cookie de session.
+    this.authService.logout();
+
+    // Redirigez l'utilisateur vers la page de déconnexion ou d'accueil.
+  }*/
+
+  public produitsFormGroup! : FormGroup;
 
   ngOnInit(): void {
     this.getUtilisateurs();
     this.getCategories();
     this.getProduits()
-  }
 
+    // initialiser produitFormGroup
+    this.produitsFormGroup = this.formBuilder.group({
+      nom : this.formBuilder.control(""),
+      description : this.formBuilder.control(""),
+      prix : this.formBuilder.control(""),
+      photoProduit : this.formBuilder.control(""),
+      idCategories : this.formBuilder.control("")
+    })
+  }
 
   // FORMULAIRE CATEGORIE
   nouvelleCategorie: any = {
@@ -83,8 +112,7 @@ export class ProfilAdminComponent implements OnInit{
 
   saveEditedCategorie() {
     this.categorieService
-      .editerCategorie(this.categorieEditee.id, this.categorieEditee)
-      .subscribe(
+      .editerCategorie(this.categorieEditee.id, this.categorieEditee).subscribe(
         (response: any) => {
           console.log('Catégorie éditée avec succès', response);
           this.getCategories(); // Mettre à jour la liste des catégories
@@ -119,33 +147,43 @@ export class ProfilAdminComponent implements OnInit{
     }
   }
 
+  ajoutProduit(){
+    let produitForm : Produit = this.produitsFormGroup.value;
+    this.produitService.addProduit(produitForm).subscribe({
+
+    })
+  }
 
 
   // FORMULAIRE AJOUT PRODUIT
-  nouveauProduit: any = {
-    nom: '',
-    prix: '',
-    description: '',
-    photo_produit: '',
-    id_categories: '' // Champ pour l'id de la catégorie sélectionnée
-  };
+  nouveauProduit: Produit | undefined;
 
   onFileChange(event: any) {
-    const selectedFile = event.target.files[0];
-    this.nouveauProduit.photo_produit = selectedFile;
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      //this.nouveauProduit.photo_produit = file; // Stocker l'objet de fichier ou l'URL du fichier selon votre besoin
+    }
   }
 
-  ajoutProduit() {
+  /*ajoutProduit() {
     console.log('Données à envoyer au service:', this.nouveauProduit);
     const formData = new FormData();
     formData.append('nom', this.nouveauProduit.nom);
     formData.append('prix', this.nouveauProduit.prix);
     formData.append('description', this.nouveauProduit.description);
-    formData.append('photo_produit', this.nouveauProduit.photo_produit);
-    formData.append('id_categories', this.nouveauProduit.id_categories);
+    formData.append('photoProduit', this.nouveauProduit.photoProduit);
+    formData.append('idCategories', this.nouveauProduit.idCategories);
 
-    this.produitService.addProduit(this.nouveauProduit).subscribe(
-      (response: any) => {
+    /*this.produitService.addProduit(this.nouveauProduit).subscribe(
+      {
+        next : data =>{
+          console.log('Produit ajouté avec succès:', data);
+        },
+        error : err =>{
+          console.error(err);
+        }
+      }*/
+      /*(response: any) => {
         console.log('Produit ajouté avec succès:', response);
         this.nouveauProduit = {};// Réinitialiser les champs du formulaire après l'ajout
       },
@@ -153,7 +191,7 @@ export class ProfilAdminComponent implements OnInit{
         console.error(error);
       }
     );
-  }
+  }*/
 
   // Affichage produits
   getProduits(): void {

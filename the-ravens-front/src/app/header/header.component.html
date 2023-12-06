@@ -16,7 +16,7 @@
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item"><a class="nav-link" [routerLink]="''">Home</a></li>
               <li class="nav-item"><a class="nav-link" [routerLink]="'nos-produits'">Nos produits</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Nous découvrir</a></li>
+              <li class="nav-item"><a class="nav-link" [routerLink]="'nous-decouvrir'">Nous découvrir</a></li>
               <li class="nav-item"><a class="nav-link" [routerLink]="'contact'">Contactez-nous</a></li>
             </ul>
           </div>
@@ -24,21 +24,28 @@
       </div>
 
       <div class="logo">
-        <img src="./assets/images/Logo-thr.png" alt="Logo">
+        <a [routerLink]="''"><img src="./assets/images/Logo-thr.png" alt="Logo"></a>
       </div>
 
       <div class="menu d-none d-sm-flex"> <!-- Cette classe signifie que le contenu sera visible uniquement sur les écrans larges ('lg' et plus) -->
         <ul class="navbar-nav flex-row">
           <li class="nav-item"><a class="nav-link" [routerLink]="''">Home</a></li>
           <li class="nav-item"><a class="nav-link" [routerLink]="'nos-produits'">Nos produits</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Nous découvrir</a></li>
+          <li class="nav-item"><a class="nav-link" [routerLink]="'nous-decouvrir'">Nous découvrir</a></li>
           <li class="nav-item"><a class="nav-link" [routerLink]="'contact'">Contactez-nous</a></li>
         </ul>
       </div>
 
 
-      <div class="icons">
+      <!--<div class="icons">
         <a [routerLink]="'connexion'"><i class='bx bxs-user-circle'></i></a>
+        <a [routerLink]="'panier'"><i class='bx bx-cart'></i></a>
+      </div>-->
+
+      <div class="icons">
+        <a *ngIf="!utilisateurAuthentifie()" [routerLink]="'connexion'"><i class='bx bxs-user-circle'></i></a>
+        <a *ngIf="utilisateurAuthentifie() && utilisateurClient()" [routerLink]="'profil-client/:id'"><i class='bx bxs-user'></i></a>
+        <a *ngIf="utilisateurAuthentifie() && utilisateurAdmin()" [routerLink]="'profil-admin/:id'"><i class='bx bxs-user'></i></a>
         <a [routerLink]="'panier'"><i class='bx bx-cart'></i></a>
       </div>
     </div>

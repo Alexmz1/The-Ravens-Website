@@ -14,10 +14,10 @@ export class InscriptionComponent {
     nom: '',
     email: '',
     mdp: '',
-    num_rue: '',
+    numRue: '',
     rue: '',
     ville: '',
-    code_postal: '',
+    codePostal: '',
     pays: '',
     role: 'Client' // Par défaut, vous pouvez ajuster si nécessaire
   };

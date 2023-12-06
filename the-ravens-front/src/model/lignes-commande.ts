@@ -1,7 +1,9 @@
 export interface LignesCommande {
   id : number;
+  nomProduit : string;
   quantite : number;
+  taille : string;
   prix : number;
-  id_produits : number;
-  id_commandes : number;
+  idProduits : number;
+  idCommandes : number;
 }

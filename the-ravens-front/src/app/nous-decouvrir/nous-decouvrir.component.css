@@ -1,0 +1,24 @@
+.text {
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.animated-text {
+  overflow: hidden; /* Masquer le texte débordant */
+  white-space: nowrap; /* Empêcher le texte de passer à la ligne */
+  animation: revealText 8s steps(1000) infinite; /* Utiliser l'animation revealText */
+}
+
+@keyframes revealText {
+  from {
+    width: 0; /* Commencer avec une largeur de 0 */
+  }
+  to {
+    width: 150%; /* Terminer avec une largeur de 100% */
+  }
+}

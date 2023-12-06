@@ -3,7 +3,7 @@
     <h2 class="mt-4 mb-4 text-center">Panier</h2>
 
     <!-- Vérifier si le panier est vide -->
-    <div class="row justify-content-center align-items-center" ><!--*ngIf="panier.length === 0"-->
+    <div class="row justify-content-center align-items-center" *ngIf="panierProduits.length === 0">
       <div class="col-md-12 text-center">
         <p>Aucun produit dans le panier</p>
         <a [routerLink]="'/nos-produits'">Continuer mes achats</a>
@@ -11,37 +11,56 @@
     </div>
 
     <!-- Afficher les produits dans le panier -->
-    <div class="row justify-content-center align-items-center" ><!--*ngIf="panier.length > 0"-->
-      <div class="col-md-8" ><!--*ngFor="let produit of panier"-->
+    <div class="row justify-content-center align-items-center" *ngIf="panierProduits.length > 0">
+      <div class="col-md-8" *ngFor="let produit of panierProduits; let i = index">
         <div class="card mb-3">
           <div class="row g-0">
-            <div class="col-md-4">
-              <img src="chemin/vers/image.jpg" class="img-fluid" alt="Image du produit">
+            <div class="col-md-4 col-sm-12">
+              <img src="{{produit?.photoProduit}}" class="img-fluid image" alt="Image du produit">
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 col-sm-12">
               <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <h5 class="card-title">{{produit.nom}}</h5>
+                    <button class="poubelle-btn" (click)="supprimerProduit(i)"><i class='bx bx-trash'></i></button>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <h5 class="card-title">Nom du produit</h5>
-                    <p class="card-text">Id : Identifiant du produit</p>
-                    <p class="card-text">Taille : Taille du produit</p>
+                    <p class="card-text">Identifiant produit: {{produit.id}}</p>
+                    <p class="card-text">Prix : {{produit.prix}} €</p>
                   </div>
                   <div class="col-md-6">
-                    <p class="card-text">Prix : Prix du produit</p>
-                    <p class="card-text">Quantité : Quantité du produit</p>
+                    <p class="card-text">Taille : {{produit.taille}}</p>
+                    <p class="card-text">Quantité : {{produit.quantite}}</p>
                   </div>
                 </div>
               </div>
-            </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Centrer la ligne hr -->
+      <div class="row justify-content-center">
+        <div class="text-center">
+          <hr>
+        </div>
+      </div>
+
+      <!-- Afficher les informations de total, livraison et TVA -->
+      <div class="row mt-3" *ngIf="panierProduits.length > 0">
+        <div class="col-md-12">
+          <p class="mb-2">Total : {{calculerPrixTotal()}} €</p>
+          <p class="mb-2">Livraison : Montant calculé à l'étape suivante</p>
+          <p class="mb-2">TVA incluse : 20%</p>
         </div>
       </div>
     </div>
 
-    <!-- Afficher le bouton de paiement si le panier n'est pas vide -->
-    <div class="row" ><!--*ngIf="panier.length > 0"-->
-      <div class="col-md-12 text-center mb-5">
-        <button class="btn btn-primary btn-lg">Paiement</button>
+  <!-- Afficher le bouton de paiement si le panier n'est pas vide -->
+    <div class="row" *ngIf="panierProduits.length > 0">
+      <div class="col-md-12 text-center mb-5 mt-5">
+        <button class="paiement-btn" (click)="paiement()">Paiement</button>
       </div>
     </div>
 

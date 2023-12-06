@@ -41,4 +41,10 @@ public class CategoryService {
 
         categoryRepository.delete(categorie);
     }
+
+
+    public Category getCategorieById(Integer id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Catégorie non trouvée"));
+    }
 }

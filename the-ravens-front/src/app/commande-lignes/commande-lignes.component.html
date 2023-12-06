@@ -1,0 +1,68 @@
+<div class="container">
+
+  <h2 class="mt-4 text-center">Confirmation de commande et paiement</h2>
+
+  <h3 class="mt-3">Vos produits</h3>
+  <div class="table-container">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Nom de l'article</th>
+        <th>Référence</th>
+        <th>Taille</th>
+        <th>Quantité</th>
+        <th class="text-right">Prix unitaire </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let produit of panierProduits">
+        <td>{{produit.nom}}</td>
+        <td>{{produit.id}}</td>
+        <td>{{produit.taille}}</td>
+        <td>{{produit.quantite}}</td>
+        <td class="text-right">{{produit.prix}}€</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+    </div>
+    <div class="col-4">
+      <table class="table table-sm text-right">
+        <tr>
+          <td><strong>Livraison</strong></td>
+          <td class="text-right">GRATUITE</td>
+        </tr>
+        <tr>
+          <td><strong>Total TTC</strong></td>
+          <td class="text-right">{{calculerPrixTotal()}}€</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <p>Adresse de livraison</p>
+      <div>
+        <!-- Affichez l'adresse de livraison du client ici -->
+
+        <!-- Ajoutez d'autres détails d'adresse ici -->
+      </div>
+    </div>
+    <div class="col-md-6">
+      <p>Adresse de facturation</p>
+      <div>
+        <!-- Affichez l'adresse de livraison du client ici -->
+
+        <!-- Ajoutez d'autres détails d'adresse ici -->
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12 text-center mb-5 mt-5">
+    <button class="paiement-btn" (click)="validerPaiement()">Valider le paiement</button>
+  </div>
+</div>
